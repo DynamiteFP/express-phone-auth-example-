@@ -3,8 +3,18 @@ let crypto = require('crypto');
 let jwt = require('jsonwebtoken');
 let bodyParser = require('body-parser');
 
-let database = require('./src/users');
-var users = database.users;
+var users = [
+	{
+		id: 1,
+		name: 'John Doe',
+		number: '+1234567890',
+	},
+	{
+		id: 2,
+		name: 'Bob Williams',
+		number: '1234567891',
+	},
+];
 
 //Enable body parsing
 let jsonParser = bodyParser.json();
@@ -61,7 +71,7 @@ app.post('/requestOtp', jsonParser, async (req, res) => {
 			})
 			.catch((err) => {
 				//Handle the twilio error
-				res.status(500).send('Error in sending OTP');
+				res.status(500).send('Error sending OTP');
 			});
 	} catch (err) {
 		//Handle the error
